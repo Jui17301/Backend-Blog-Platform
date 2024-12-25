@@ -57,8 +57,8 @@ userSchema.post('save',function(doc,next){
     next()
 })
 
-userSchema.statics.isUserExists = async function (id: string) {
-  return await User.findOne({ id }).select('+password');
+userSchema.statics.isUserExists = async function (email: string) {
+  return await User.findOne({ email }).select('+password');
 };
 
 

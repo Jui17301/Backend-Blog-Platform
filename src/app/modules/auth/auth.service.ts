@@ -14,7 +14,7 @@ const registerUser=async(payload:TUser)=>{
 
 const loginUser=async(payload:TLoginUser)=>{
 
-    console.log(payload.email)
+    // console.log(payload.email)
     const user = await User.isUserExists(payload?.email);
 
     if(!user){
