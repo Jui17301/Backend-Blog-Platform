@@ -19,6 +19,10 @@ app.use(express.json());
 // application routes
 app.use('/api', router);
 
+
+app.get('/',(req:Request,res:Response)=>{
+    res.send('Hello Blog Platform')
+})
 app.use(globalErrorHandler);
 
 //Not Found

@@ -3,13 +3,13 @@
 // import jwt, { JwtPayload } from 'jsonwebtoken';
 // import config from '../config';
 // import AppError from '../errors/AppError';
-// import { TUserRole } from '../modules/user/user.interface';
-// import { User } from '../modules/user/user.model';
 // import catchAsync from '../utils/catchAsync';
+// import User from '../modules/user/user.model';
+// import { TUserRole } from '../modules/user/user.constant';
 
 // const auth = (...requiredRoles: TUserRole[]) => {
 //   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-//     const token = req.headers.authorization;
+//     const token = req.headers.authorization?.split(' ')[1]; //.split(' ')[1]:Splits the Bearer <token> string by a space and extracts the token part.
 
 //     // checking if the token is missing
 //     if (!token) {

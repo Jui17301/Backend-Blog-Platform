@@ -31,7 +31,7 @@ const login=catchAsync(async(req:Request,res:Response)=>{
        message:'login successful',
        statusCode:StatusCodes.OK,
       data:{
-        token:result.token,
+        token:result.accessToken,
       }
        
     //    data: result.verifiedUser

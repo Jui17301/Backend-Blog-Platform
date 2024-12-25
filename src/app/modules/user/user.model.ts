@@ -1,13 +1,13 @@
 import  bcrypt  from 'bcrypt';
 import { boolean } from 'zod';
 import { model, Schema } from "mongoose";
-import { TUser} from "./user.interface";
+import { TUser, UserModel} from "./user.interface";
 import config from '../../config';
 // import validator from 'validator';
 
 
 
-  const userSchema=new Schema<TUser>(
+  const userSchema=new Schema<TUser,UserModel>(
     {
         name:{
             type:String,
@@ -57,6 +57,16 @@ userSchema.post('save',function(doc,next){
     next()
 })
 
-const User = model<TUser>('User',userSchema)
+userSchema.statics.isUserExists = async function (id: string) {
+  return await User.findOne({ id }).select('+password');
+};
 
-export default User
+
+userSchema.statics.isPasswordMatched = async function (
+  plainTextPassword,
+  hashedPassword,
+) {
+  return await bcrypt.compare(plainTextPassword, hashedPassword);
+};
+
+export const User = model<TUser,UserModel>('User',userSchema)
