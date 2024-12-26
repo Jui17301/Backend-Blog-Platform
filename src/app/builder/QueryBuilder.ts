@@ -17,7 +17,7 @@ class QueryBuilder<T>{
 
     search(searchableFields:string[]){
 
-        const searchTerm=this?.query?.searchTerm
+        const searchTerm=this?.query?.search
         this.modelQuery=this.modelQuery.find({
             $or:searchableFields.map((field:any)=>({
                 [field]:{$regex:searchTerm,$options:'i'}
@@ -32,8 +32,6 @@ class QueryBuilder<T>{
     filter(){
         const queryObj={...this.query}
         const excludingImportant=['searchTerm',
-      'page',
-      'limit',
       'sortOrder',
       'sortBy',
       'fields']
@@ -44,19 +42,6 @@ class QueryBuilder<T>{
 
       return this;
     }
-
-
-    paginate(){
-        const page=Number(this?.query?.page) || 1;
-        const limit = Number(this?.query?.limit) || 10;
-        //skip=(page-1)*limit
-        const skip=(page-1)*limit;
-        this.modelQuery= this.modelQuery.skip(skip).limit(limit);
-
-        return this
-    }
-
-
     sort(){
         let sortStr 
 
@@ -72,17 +57,17 @@ class QueryBuilder<T>{
     return this
  
         }
-        select() {
-            let fields = '-__v'
+        // select() {
+        //     let fields = '-__v'
         
-            if (this?.query?.fields) {
-              fields = (this?.query.fields as string)?.split(',').join(' ')
-            }
+        //     if (this?.query?.fields) {
+        //       fields = (this?.query.fields as string)?.split(',').join(' ')
+        //     }
         
-            this.modelQuery = this.modelQuery.select(fields)
+        //     this.modelQuery = this.modelQuery.select(fields)
         
-            return this
-          }
+        //     return this
+        //   }
 }
 
 export default QueryBuilder

@@ -1,35 +1,33 @@
-// import express from 'express'
-// import { BlogControllers } from './blog.controller';
+import express from 'express'
+import validateRequest from '../../middlewares/validateRequest';
+import { BlogValidations } from './blog.validation';
+import { USER_ROLE } from '../user/user.constant';
+import auth from '../../middlewares/auth';
+import { BlogControllers } from './blog.controller';
+
+const router=express.Router();
+
+router.post('/',
+    validateRequest(BlogValidations.createBlogValidationSchema),
+    auth(USER_ROLE.user),
+    BlogControllers.createBlog)
+
+router.patch("/:id",
+    validateRequest(BlogValidations.updateBlogValidationSchema),
+    auth(USER_ROLE.user),
+    BlogControllers.updateBlog);
+
+router.delete("/:id",
+    auth(USER_ROLE.user),
+    BlogControllers.deleteBlog);
+
+router.get('/', 
+    auth(USER_ROLE.user,USER_ROLE.admin),
+    BlogControllers.getAllBlogs);
 
 
-// const router=express.Router();
-
-// router.post('/create-blog',BlogControllers.createBlog)
-// router.get('/:id',BlogControllers.getSingleBlog)
-
-//   router.delete('/:id', BlogControllers.deleteBlog);
   
-//   router.get('/', BlogControllers.getAllBlogs);
-
-
-  
-//   export const blogRoutes = router;
+  export const blogRoutes = router;
 
 
 
-
-
-
-
-
-
-// // import { Router } from "express";
-// // import { createBlog, updateBlog, deleteBlog, getAllBlogs } from "../controllers/blogController";
-// // import { authenticate } from "../middlewares/authenticate";
-
-// // export const blogRouter = Router();
-
-// // blogRouter.get("/", getAllBlogs);
-// // blogRouter.post("/", authenticate, createBlog);
-// // blogRouter.patch("/:id", authenticate, updateBlog);
-// // blogRouter.delete("/:id", authenticate, deleteBlog);
