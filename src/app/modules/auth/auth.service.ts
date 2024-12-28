@@ -27,9 +27,11 @@ const loginUser=async(payload:TLoginUser)=>{
        //  create Token
        // step-1
   const jwtPayload = {
+    id:user._id.toString(),
     email: user.email,
     role: user.role,
   };
+  console.log(jwtPayload)
 // step-2
   const accessToken = createToken(
     jwtPayload,

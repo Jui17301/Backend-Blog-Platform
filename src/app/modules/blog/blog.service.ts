@@ -3,7 +3,11 @@ import { TBlog } from './blog.interface';
 import Blog from './blog.model';
 
 const createBlogIntoDB=async(payload:TBlog)=>{
-    const result=await Blog.create(payload);
+    // const {author,...blogData}=payload
+    // console.log(author,blogData)
+    const result=await Blog.create(payload)
+    // .populate('author','name email');
+    // console.log(payload);
     return result
 }
 const getAllBlogsFromDB=async(query:Record<string,unknown>)=>{
@@ -21,7 +25,8 @@ const blogQuery=new QueryBuilder
 }
 const updateBlogIntoDB = async (id: string, payload: Partial<TBlog>) => {
     const result = Blog.findByIdAndUpdate(
-        id, payload,
+        { _id: id },
+         payload,
         {
             new:true
         }

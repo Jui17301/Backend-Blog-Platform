@@ -4,12 +4,20 @@ import { BlogServices } from "./blog.service";
 import httpStatus from 'http-status-codes';
 
 const createBlog=catchAsync(async(req,res)=>{
-    const result=await BlogServices.createBlogIntoDB(req.body);
-    //  console.log(result)
+  
+
+  const payload ={
+    ...req.body,
+     author :req.user?._id
+  }
+  // console.log({payload});
+    const result=await BlogServices.createBlogIntoDB(payload);
+     console.log(result)
     sendResponse(res, {
       success: true,
       message: 'Blog created successfully',
       statusCode: httpStatus.CREATED,
+      // data:result
     data:{
         _id:result._id,
         title:result.title,
@@ -51,6 +59,7 @@ const updateBlog =catchAsync(async(req, res) =>{
         content:result?.content,
         author:result?.author
       }  
+   
     })
 })
 const deleteBlog = catchAsync(async (req, res) => {

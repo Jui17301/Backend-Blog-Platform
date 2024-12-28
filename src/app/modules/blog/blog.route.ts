@@ -8,13 +8,14 @@ import { BlogControllers } from './blog.controller';
 const router=express.Router();
 
 router.post('/',
-    validateRequest(BlogValidations.createBlogValidationSchema),
     auth(USER_ROLE.user),
+    validateRequest(BlogValidations.createBlogValidationSchema),
+    
     BlogControllers.createBlog)
 
 router.patch("/:id",
-    validateRequest(BlogValidations.updateBlogValidationSchema),
     auth(USER_ROLE.user),
+    validateRequest(BlogValidations.updateBlogValidationSchema),
     BlogControllers.updateBlog);
 
 router.delete("/:id",
