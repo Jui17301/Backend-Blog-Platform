@@ -51,14 +51,19 @@ const blogQuery=new QueryBuilder
 
 }
 const updateBlogIntoDB = async (id: string, payload: Partial<TBlog>) => {
-    const result = Blog.findByIdAndUpdate(
-        { _id: id },
+    const result =await  Blog.findByIdAndUpdate(
+         id ,
          payload,
         {
             new:true
         }
-    )
-    return result
+    ).populate('author', 'name email');
+    return {
+        _id: result?.id,
+    title: result?.title,
+    content: result?.content,
+    author: result?.author,
+    }
   }
 
 const deleteBlogFromDB = async (id: string) => {
