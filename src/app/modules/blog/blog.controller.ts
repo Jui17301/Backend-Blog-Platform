@@ -8,22 +8,16 @@ const createBlog=catchAsync(async(req,res)=>{
 
   const payload ={
     ...req.body,
-     author :req.user?._id
+     author :req.user?.id
   }
   // console.log({payload});
     const result=await BlogServices.createBlogIntoDB(payload);
-     console.log(result)
+    //  console.log(result)
     sendResponse(res, {
       success: true,
       message: 'Blog created successfully',
       statusCode: httpStatus.CREATED,
-      // data:result
-    data:{
-        _id:result._id,
-        title:result.title,
-        content:result.content,
-        author:result.author
-    }
+      data:result
     });
 })
 
@@ -53,12 +47,13 @@ const updateBlog =catchAsync(async(req, res) =>{
       success: true,
       message: 'Blog updated successfully',
       statusCode: httpStatus.OK, 
-      data: {
-        _id:result?._id,
-        title:result?.title,
-        content:result?.content,
-        author:result?.author
-      }  
+      data:result
+      // data: {
+      //   _id:result?._id,
+      //   title:result?.title,
+      //   content:result?.content,
+      //   author:result?.author
+      // }  
    
     })
 })

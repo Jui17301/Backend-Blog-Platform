@@ -8,8 +8,6 @@ import { z } from "zod";
   content: z.string({
     required_error: "Content is required",
   }),
-  // author: z.string().optional(),
-  // isPublished: z.boolean().optional().default(true)
 });
 const updateBlogValidationSchema = z.object({
     title: z.string({
@@ -18,9 +16,7 @@ const updateBlogValidationSchema = z.object({
     }).optional(),
     content: z.string({
       required_error: "Content is required",
-    }).optional(),
-    author: z.string(),
-    isPublished: z.boolean().optional().default(true)
+    }).optional()
   });
 
 export const BlogValidations={
