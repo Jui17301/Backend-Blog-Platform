@@ -38,16 +38,18 @@ const createBlogIntoDB=async(payload:TBlog)=>{
     }
 }
 const getAllBlogsFromDB=async(query:Record<string,unknown>)=>{
-    // console.log(query)
+    console.log(query)
     const searchableFields=['title','content'];
 const blogQuery=new QueryBuilder
 (
-    Blog.find(),query
+    Blog.find().populate('author', 'name email'),
+    query
 )
 .search(searchableFields)
 .filter()
 .sort()
-// .select()
+const result = await blogQuery.modelQuery;
+return result;
 
 }
 const updateBlogIntoDB = async (id: string, payload: Partial<TBlog>) => {

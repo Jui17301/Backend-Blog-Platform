@@ -10,7 +10,17 @@ const userValidationSchema=z.object({
   
 
 })
+const updateUserValidationSchema=z.object({
+    name:z.string().optional(),
+    email:z.string().email().optional(),
+    password:z.string().max(20).optional(),
+    role:z.enum(['user','admin']).optional(),
+    isBlocked: z.boolean().default(false)
+  
+
+})
 
 export const UserValidation={
-    userValidationSchema
+    userValidationSchema,
+    updateUserValidationSchema
 }

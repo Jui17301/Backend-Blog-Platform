@@ -57,17 +57,7 @@ class QueryBuilder<T>{
     return this
  
         }
-        // select() {
-        //     let fields = '-__v'
-        
-        //     if (this?.query?.fields) {
-        //       fields = (this?.query.fields as string)?.split(',').join(' ')
-        //     }
-        
-        //     this.modelQuery = this.modelQuery.select(fields)
-        
-        //     return this
-        //   }
+      
 }
 
 export default QueryBuilder
