@@ -6,6 +6,7 @@ const updateAdminBlockIntoDB = async (id: string) => {
     const result =await  User.findByIdAndUpdate(
          id ,
          
+         { isBlocked: true },
         {
             new:true
         }
