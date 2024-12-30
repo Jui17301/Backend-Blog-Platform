@@ -42,13 +42,18 @@ const getAllBlogsFromDB=async(query:Record<string,unknown>)=>{
     const searchableFields=['title','content'];
 const blogQuery=new QueryBuilder
 (
-    Blog.find().populate('author', 'name email'),
+    Blog.find().populate('author','name email'),
     query
 )
+// console.log(blogQuery)
 .search(searchableFields)
+// console.log(blogQuery)
 .filter()
+// console.log(blogQuery)
 .sort()
+.fields()
 const result = await blogQuery.modelQuery;
+// console.log(result)
 return result;
 
 }

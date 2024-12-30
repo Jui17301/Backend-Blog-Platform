@@ -14,9 +14,14 @@ const handleCastError = (
   const statusCode = 400;
 
   return {
+    success: false,
+    message: 'Duplicate Entry',
     statusCode,
-    message: 'Invalid ID',
-    errorSources,
+    error: {
+      details: errorSources,
+    },
+    errorDetails: errorSources, 
+    stack: err.stack,
   };
 };
 

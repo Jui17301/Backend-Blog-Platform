@@ -34,10 +34,16 @@ class QueryBuilder<T>{
         const queryObj={...this.query}
         const excludingImportant=['search',
       'sortOrder',
-      'sortBy'
+      'sortBy',
+      'fields'
     ]
 
       excludingImportant.forEach((key)=>delete queryObj[key]);
+      
+      if(queryObj.filter){
+          queryObj.author = queryObj.filter;
+          delete queryObj.filter
+      }
 
       this.modelQuery =this.modelQuery.find(queryObj as FilterQuery<T>);
 
@@ -58,6 +64,18 @@ class QueryBuilder<T>{
     return this
  
         }
+        fields() {
+            // const fields = this?.query?.fields
+            // ? (this.query.fields as string).split(',').join(' ')
+            // : '-__v -isPublished -createdAt -updatedAt';
+          
+       
+    const fields = this.query.fields
+      ? (this.query.fields as string).split  (',').join(' ')
+      : '_id title content author';
+            this.modelQuery = this.modelQuery.select(fields);
+            return this;
+          }
       
 }
 

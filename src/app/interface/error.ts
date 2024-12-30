@@ -4,7 +4,12 @@ export type TErrorSources = {
 }[];
 
 export type TGenericErrorResponse = {
+  errorDetails: TErrorSources;
+  success: boolean;
   statusCode: number;
   message: string;
-  errorSources: TErrorSources;
+  error: {
+    details: TErrorSources;
+  };
+  stack?: string;
 };
