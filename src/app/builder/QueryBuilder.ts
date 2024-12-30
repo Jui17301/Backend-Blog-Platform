@@ -20,7 +20,7 @@ class QueryBuilder<T>{
         const searchTerm=this?.query?.search
         if (searchTerm) {
         this.modelQuery=this.modelQuery.find({
-            $or:searchableFields.map((field:any)=>({
+            $or:searchableFields.map((field:string)=>({
                 [field]:{$regex:searchTerm,$options:'i'}
             }))
         } as FilterQuery<T>)
@@ -34,12 +34,12 @@ class QueryBuilder<T>{
         const queryObj={...this.query}
         const excludingImportant=['search',
       'sortOrder',
-      'sortBy',
-      'fields']
+      'sortBy'
+    ]
 
       excludingImportant.forEach((key)=>delete queryObj[key]);
 
-      this.modelQuery =this.modelQuery.find(queryObj);
+      this.modelQuery =this.modelQuery.find(queryObj as FilterQuery<T>);
 
       return this;
     }
@@ -51,10 +51,10 @@ class QueryBuilder<T>{
             const sortOrder = this?.query?.sortOrder
       // "-price" othoba "price"
       sortStr = `${sortOrder === 'desc' ? '-' : ''}${sortBy}`
-    }
+    
 
     this.modelQuery = this.modelQuery.sort(sortStr)
-
+        }
     return this
  
         }

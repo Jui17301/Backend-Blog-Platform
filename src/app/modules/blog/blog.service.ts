@@ -38,7 +38,7 @@ const createBlogIntoDB=async(payload:TBlog)=>{
     }
 }
 const getAllBlogsFromDB=async(query:Record<string,unknown>)=>{
-    console.log(query)
+    // console.log(query)
     const searchableFields=['title','content'];
 const blogQuery=new QueryBuilder
 (
