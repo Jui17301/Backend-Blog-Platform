@@ -1,8 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 // import cookieParser from 'cookie-parser';
 // import cors from 'cors';
 import express, { Application, Request, Response } from 'express';
@@ -19,21 +14,20 @@ app.use(express.json());
 // application routes
 app.use('/api', router);
 
-
-app.get('/',(req:Request,res:Response)=>{
-    res.send('Hello Blog Platform')
-})
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello Blog Platform');
+});
 app.use(globalErrorHandler);
 
 //Not Found
 app.use(notFound);
 
 // Route not found is not an error , it is an statement same as API NOT FOUND
-app.use("*",(req:Request,res:Response)=>{
-    res.status(404).json({
-        status:false,
-        message:'Route not found'
-    })
-})
+app.use('*', (req: Request, res: Response) => {
+  res.status(404).json({
+    status: false,
+    message: 'Route not found',
+  });
+});
 
 export default app;

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import mongoose from 'mongoose';
 import { TErrorSources, TGenericErrorResponse } from '../interface/error';
 
@@ -10,13 +11,10 @@ const handleCastError = (
       message: err.message,
     },
   ];
-
-  const statusCode = 400;
   return {
-   
     success: false,
     message: 'Invalid ID',
-    statusCode,
+    statusCode:400,
     errorDetails: errorSources,
     error: {
       details: errorSources,

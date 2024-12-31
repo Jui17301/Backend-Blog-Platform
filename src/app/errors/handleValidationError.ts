@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import mongoose from 'mongoose';
 import { TErrorSources, TGenericErrorResponse } from '../interface/error';
 
@@ -13,12 +14,11 @@ const handleValidationError = (
     },
   );
 
-  const statusCode = 400;
 
   return {
     success: false,
     message: 'Validation Error',
-    statusCode,
+    statusCode:400,
     error: {
       details,
     },

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import mongoose from 'mongoose';
 import { TErrorSources, TGenericErrorResponse } from '../interface/error';
 
@@ -11,16 +12,15 @@ const handleCastError = (
     },
   ];
 
-  const statusCode = 400;
 
   return {
     success: false,
     message: 'Duplicate Entry',
-    statusCode,
+    statusCode:400,
     error: {
       details: errorSources,
     },
-    errorDetails: errorSources, 
+    errorDetails: errorSources,
     stack: err.stack,
   };
 };

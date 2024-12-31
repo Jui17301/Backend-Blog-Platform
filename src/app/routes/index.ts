@@ -5,20 +5,19 @@ import { blogRoutes } from '../modules/blog/blog.route';
 import { adminRouter } from '../modules/admin/admin.route';
 const router = Router();
 
-const moduleRoutes: any[] = [
-    {
-      path: '/blogs',
-      route: blogRoutes,
-    },
-    {
-      path: '/auth',
-      route: authRouter,
-    },
-    {
-      path: '/admin',
-      route: adminRouter,
-    },
-
+const moduleRoutes = [
+  {
+    path: '/blogs',
+    route: blogRoutes,
+  },
+  {
+    path: '/auth',
+    route: authRouter,
+  },
+  {
+    path: '/admin',
+    route: adminRouter,
+  },
 ];
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route));

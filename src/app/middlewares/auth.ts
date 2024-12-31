@@ -25,7 +25,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
       config.jwt_access_secret as string,
     ) as JwtPayload;
 
-    const {id, email,role} = decoded;
+    const { id, email, role } = decoded;
 
     // checking if the user is exist
     const user = await User.isUserExists(email);
@@ -33,27 +33,16 @@ const auth = (...requiredRoles: TUserRole[]) => {
     if (!user) {
       throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
     }
-  
+
     if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(
-        httpStatus.UNAUTHORIZED,
-        'You are not authorized!',
-      );
+      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
     }
 
     // req.user = decoded as JwtPayload;
-    req.user={id,email,role}
+    req.user = { id, email, role };
     // console.log(req.user);
     next();
   });
 };
 
 export default auth;
-
-
-
-
-
-
-
-
